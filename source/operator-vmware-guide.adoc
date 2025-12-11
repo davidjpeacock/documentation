@@ -521,7 +521,34 @@ When using VMware as a source, there are several ways to handle the flavor for t
 ** Force usage of an existing flavor: `flavor_uuid: <your_flavor_uuid>`
 ** Useful to define custom properties for host aggregation or targeted placement.
 
-=== Virt‑v2v
+=== Encryption
+
+If you use encryption with our VMware virtual machine (VMware encryption or encrypted
+file system), you can provide the key or the passphrase via the 'v2v_extra_opt'
+
+[source,yaml]
+----
+v2v_extra_opt: "--key all:key:mypassphrase"
+# or
+v2v_extra_opt: "--key all:file:mykeyfile"
+----
+
+The `v2v_extra_opt` is a wrapper on https://libguestfs.org/virt-v2v.1.html parameters.
+You can append options via this variable.
+
+=== First boot script
+
+You can inject during the migration, at the conversion step, a script or a command
+which will be executed a the first boot of the new OpenStack disk life.
+
+[source,yaml]
+----
+v2v_first_boot_script: "/path/to/firstboot.sh"
+----
+
+The first boot script should already present on the conversion host.
+
+=== Virt‑v2v Wrapper (not recommended)
 
 Provide the following additional information when using virt‑v2v:
 
